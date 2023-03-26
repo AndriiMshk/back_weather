@@ -2,6 +2,7 @@
 
 import { getArgs } from './helpers/args.js'
 import { printHelp } from './services/log_service.js'
+import { seveKeyValue } from './services/storage.servise.js'
 
 const initCLI = () => {
     const args = getArgs(process.argv)
@@ -9,10 +10,10 @@ const initCLI = () => {
         printHelp()
     }
     if (args.s) {
-        //save city
+        seveKeyValue('sity', args.s)
     }
     if (args.t) {
-        //seva tokec
+        seveKeyValue('token', args.t)
     }
     //return wether
 }
