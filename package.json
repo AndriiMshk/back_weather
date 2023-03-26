@@ -13,12 +13,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AndriiMshk/watherApp.git"
+    "url": "git+https://github.com/AndriiMshk/weatherApp.git"
   },
   "author": "Andrii",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AndriiMshk/watherApp/issues"
+    "url": "https://github.com/AndriiMshk/weatherApp/issues"
   },
-  "homepage": "https://github.com/AndriiMshk/watherApp#readme"
+  "homepage": "https://github.com/AndriiMshk/weatherApp#readme"
 }
