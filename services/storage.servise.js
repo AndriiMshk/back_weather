@@ -4,6 +4,9 @@ import { promises } from 'fs'
 
 const filePath = join(homedir(), 'weather-data.json')
 
+const TOKEN = 'token'
+const CITY = 'city'
+
 const seveKeyValue = async (key, value) => {
     let data = {}
     if (await isExist(filePath)) {
@@ -32,4 +35,4 @@ const isExist = async (path) => {
     }
 }
 
-export { seveKeyValue, getKEyValue }
+export { seveKeyValue, getKEyValue, TOKEN, CITY }
