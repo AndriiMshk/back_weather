@@ -8,8 +8,7 @@ const BASE_URL = `https://api.openweathermap.org/data/2.5/weather`
 const getWeather = async (city) => {
     const token = await getKEyValue(TOKEN)
     if (!token) {
-        printError('Token is not defined')
-        return
+        throw new Error('Token is not defined')
     }
     const { data } = await axios.get(BASE_URL, {
         params: {

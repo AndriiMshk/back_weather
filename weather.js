@@ -7,7 +7,7 @@ import { getWeather } from './services/api.service.js'
 
 const saveToken = async (token) => {
     if (!token.length) {
-        printError('Where is the token?')
+        printError('Token is not defined')
         return
     }
     try {
@@ -18,20 +18,34 @@ const saveToken = async (token) => {
     }
 }
 
+const getForecast = async () => {
+    try {
+        const city = await getKEyValue(CITY)
+        const weather = await getWeather(city)
+        console.log(weather);
+    } catch (e) {
+        if (e.response?.status === 404) {
+            printError('City is not exist')
+        } else if (e.response?.status === 401) {
+            printError('Tokin is invalid')
+        } else {
+            printError(e.message)
+        }
+    }
+}
+
 const initCLI = () => {
     const args = getArgs(process.argv)
     if (args.h) {
-        printHelp()
+        return printHelp()
     }
     if (args.s) {
-        seveKeyValue(CITY, args.s)
+        return seveKeyValue(CITY, args.s)
     }
     if (args.t) {
         return saveToken(args.t)
     }
-    getWeather('kiev')
+    getForecast()
 }
 
 initCLI()
-
-//e4c4b727621f195c880c628cce157283
