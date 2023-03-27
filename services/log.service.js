@@ -19,4 +19,16 @@ const printHelp = () => {
     );
 }
 
-export { printError, printSucsess, printHelp }
+
+const printWeather = (weather) => {
+    console.log(
+        dedent`${chalk.bgGreen('RESOULT:')}
+            Country: ${weather.sys.country}
+            City: ${weather.name}
+            Temp: ${weather.main.temp}
+            Fells like: ${weather.main.feels_like}
+            ${weather.weather[0].main}`
+    );
+}
+
+export { printError, printSucsess, printHelp, printWeather }

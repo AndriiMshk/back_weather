@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import { getArgs } from './helpers/args.js'
-import { printHelp, printSucsess, printError } from './services/log.service.js'
+import { printHelp, printSucsess, printError, printWeather } from './services/log.service.js'
 import { seveKeyValue, TOKEN, CITY, getKEyValue } from './services/storage.servise.js'
 import { getWeather } from './services/api.service.js'
+
 
 const saveToken = async (token) => {
     if (!token.length) {
@@ -18,11 +19,24 @@ const saveToken = async (token) => {
     }
 }
 
+const saveCity = async (city) => {
+    if (!city.length) {
+        printError('City is not defined')
+        return
+    }
+    try {
+        await seveKeyValue(CITY, city)
+        printSucsess('City saved')
+    } catch (err) {
+        printError(err.message)
+    }
+}
+
 const getForecast = async () => {
     try {
         const city = await getKEyValue(CITY)
         const weather = await getWeather(city)
-        console.log(weather);
+        printWeather(weather)
     } catch (e) {
         if (e.response?.status === 404) {
             printError('City is not exist')
@@ -36,16 +50,16 @@ const getForecast = async () => {
 
 const initCLI = () => {
     const args = getArgs(process.argv)
-    if (args.h) {
-        return printHelp()
+    switch (args) {
+        case args.h:
+            return printHelp()
+        case args.s:
+            return saveCity(args.s)
+        case args.t:
+            return saveToken(args.t)
+        default:
+            return getForecast()
     }
-    if (args.s) {
-        return seveKeyValue(CITY, args.s)
-    }
-    if (args.t) {
-        return saveToken(args.t)
-    }
-    getForecast()
 }
 
 initCLI()
