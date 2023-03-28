@@ -50,16 +50,10 @@ const getForecast = async () => {
 
 const initCLI = () => {
     const args = getArgs(process.argv)
-    switch (args) {
-        case args.h:
-            return printHelp()
-        case args.s:
-            return saveCity(args.s)
-        case args.t:
-            return saveToken(args.t)
-        default:
-            return getForecast()
-    }
+    if (args.h) return printHelp()
+    else if (args.s) return saveCity(args.s)
+    else if (args.t) return saveToken(args.t)
+    else return getForecast()
 }
 
 initCLI()
